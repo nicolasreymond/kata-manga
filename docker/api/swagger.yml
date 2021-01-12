@@ -575,34 +575,7 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
-  Order:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      petId:
-        type: "integer"
-        format: "int64"
-      quantity:
-        type: "integer"
-        format: "int32"
-      shipDate:
-        type: "string"
-        format: "date-time"
-      status:
-        type: "string"
-        description: "Order Status"
-        enum:
-        - "placed"
-        - "approved"
-        - "delivered"
-      complete:
-        type: "boolean"
-        default: false
-    xml:
-      name: "Order"
-  Category:
+  Genre:
     type: "object"
     properties:
       id:
@@ -611,32 +584,8 @@ definitions:
       name:
         type: "string"
     xml:
-      name: "Category"
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      username:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
-        type: "string"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      phone:
-        type: "string"
-      userStatus:
-        type: "integer"
-        format: "int32"
-        description: "User Status"
-    xml:
-      name: "User"
-  Tag:
+      name: "Genre"
+  Magazine:
     type: "object"
     properties:
       id:
@@ -645,44 +594,63 @@ definitions:
       name:
         type: "string"
     xml:
-      name: "Tag"
-  Pet:
+      name: "Magazine"
+  Author:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+    xml:
+      name: "Author"
+  Manga:
     type: "object"
     required:
-    - "name"
-    - "photoUrls"
+    - "rank"
+    - "title"
     properties:
       id:
         type: "integer"
         format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
+      title:
         type: "string"
-        example: "doggie"
-      photoUrls:
+        example: "Naruto"
+      rank:
+        type: "int"
+      magazine:
         type: "array"
         xml:
-          name: "photoUrl"
+          name: "magazine"
           wrapped: true
         items:
-          type: "string"
-      tags:
+          $ref: "#/definitions/Magazine"
+      genre:
         type: "array"
         xml:
-          name: "tag"
+          name: "genre"
           wrapped: true
         items:
-          $ref: "#/definitions/Tag"
+          $ref: "#/definitions/Genre"
+      author:
+        type: "array"
+        xml:
+          name: "author"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Author"
       status:
         type: "string"
-        description: "pet status in the store"
+        description: "Manga writing status"
         enum:
-        - "available"
-        - "pending"
-        - "sold"
+        - "currently_publishing"
+        - "finished"
+        - "on_hiatus"
     xml:
-      name: "Pet"
+      name: "manga"
   ApiResponse:
     type: "object"
     properties:
