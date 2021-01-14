@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 /**
  * @remark Mettre le bon chemin d'accès à votre fichier contenant les constantes
@@ -35,8 +35,8 @@ class EDatabase
     {
         if (!self::$objInstance) {
             try {
-                $dsn = EDB_DBTYPE . ':host=' . EDB_HOST . ';port=' . EDB_PORT . ';dbname=' . EDB_DBNAME;
-                self::$objInstance = new PDO($dsn, EDB_USER, EDB_PASS, array('charset' => 'utf8'));
+                $dsn = EDB_DBTYPE . ':host=' . EDB_HOST . ';port=' . EDB_PORT . ';dbname=' . EDB_DBNAME . ';charset=utf8';
+                self::$objInstance = new PDO($dsn, EDB_USER, EDB_PASS);
                 self::$objInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException  $e) {
                 echo "EDatabase Error: " . $e;
