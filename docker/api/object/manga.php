@@ -76,3 +76,28 @@
             break;
 
     }
+
+    function mockMangaList() {
+        $manga1 = array(
+            "author" => "oda",
+            "title" => "One Piece"
+        );
+        $manga2 = array(
+            "author" => "Miyazaki",
+            "title" => "Spirited away"
+        );
+        return [
+            $manga1,
+            $manga2
+        ];
+    }
+
+    function findMangaByAuthors($authors) {
+        return mockMangaList();  # TODO
+    }
+
+    function send_json_response($struct) {
+        header('Content-Type: application/json');
+        echo json_encode($struct,  JSON_INVALID_UTF8_SUBSTITUTE);
+
+    }
