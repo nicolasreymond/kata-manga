@@ -15,7 +15,12 @@ services:
       - ./initSQL:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
-
+  web:
+      build: ./api
+      ports:
+        - 1338:80
+      volumes: 
+        - "./web:/var/www/html/"
   adminer:
     image: adminer
     ports:
