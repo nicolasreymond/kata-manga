@@ -61,8 +61,9 @@
 
         case 'DELETE':
             // Supprimer un manga
-            $id = intval($_GET["id"]);
-            deleteManga($id);
+            if (intval($_GET["id"])) {
+                deleteManga($id);
+            }
             break;
 
         case 'PUT':
@@ -117,6 +118,11 @@
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    function deleteManga($id)
+    {
+        $query="delete from manga where id=:id";
+        $stmt = EDatabase::prepare($query);
+        $stmt->execute(array(':id' => $id));
     }
 
     function send_json_response($struct) {
