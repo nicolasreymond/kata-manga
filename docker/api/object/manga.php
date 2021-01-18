@@ -43,15 +43,16 @@
                 send_json_response(
                     findMangaByAuthors(explode(",", $_GET["author"]))
                 );
-            } 
-            elseif (!empty($_GET["id"])) {
-                $id=intval($_GET["id"]);
-                getManga($id);
-            } else {
+            } elseif (preg_match('|/manga/findByGenre|', $path_info, $matched)) {  # /manga/findByGenre?genre=oda,miyazaki
                 send_json_response(
-                    getMangas()
+                    findMangaByGenre(explode(",", $_GET["genre"]))
                 );
             }
+            // } else {
+            //     send_json_response(
+            //         getMangas()
+            //     );
+            // }
             break;
 
         case 'POST':
@@ -78,7 +79,8 @@
 
     }
 
-    function mockMangaList() {
+    function mockMangaList()
+    {
         $manga1 = array(
             "author" => "oda",
             "title" => "One Piece"
@@ -118,6 +120,8 @@
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+
     function deleteManga($id)
     {
         $query="delete from manga where id=:id";
@@ -125,8 +129,9 @@
         $stmt->execute(array(':id' => $id));
     }
 
-    function send_json_response($struct) {
-        header('Content-Type: application/json');
-        echo json_encode($struct,  JSON_INVALID_UTF8_SUBSTITUTE);
 
+    function send_json_response($struct)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($struct, JSON_INVALID_UTF8_SUBSTITUTE);
     }
