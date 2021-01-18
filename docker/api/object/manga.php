@@ -104,6 +104,19 @@
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    function findMangaByGenre($genres)
+    {
+        $query = "SELECT * FROM manga m INNER JOIN `classify` c ON m.id = c.idmanga INNER JOIN genre g ON g.id = c.idgenre ";
+        if ($genres[0] != "") {
+            $query .= " WHERE a.name LIKE :genres";
+        }
+        $response = array();
+        $stmt = EDatabase::prepare($query);
+        $stmt->execute(array(':genres' => $genres[0]));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     }
 
     function send_json_response($struct) {
