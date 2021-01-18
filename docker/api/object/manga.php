@@ -13,11 +13,13 @@
       
     }
     
-    function getManga($id=0)
+    function getMangaInfo($id=0)
     {
-        $query = "SELECT * FROM manga";
+        $query = "SELECT * FROM manga m INNER JOIN `write` w ON m.id = w.idmanga INNER JOIN author a ON a.id = w.idauthor 
+                                        INNER JOIN `classify` c ON m.id = c.idmanga INNER JOIN genre g ON g.id = c.idgenre
+                                        INNER JOIN `publish` p ON m.id = p.idmanga INNER JOIN magazine ma ON ma.id = p.idmagazine";
         if ($id > 0) {
-            $query .= " WHERE id=:id LIMIT 1";
+            $query .= " WHERE m.id=:id LIMIT 1";
         }
         $response = array();
         $stmt = EDatabase::prepare($query);
@@ -31,9 +33,9 @@
         
         case 'GET':
             $matched = array();
-            if (preg_match('|/manga/(\d+)|', $path_info, $matched)) {                     # /manga/5
+            if (preg_match('|/manga/(\d+)|', $path_info, $matched)) {
                 send_json_response(
-                    getManga($matched[1])
+                    getMangaInfo($matched[1])
                 );
             } elseif (preg_match('|/manga/findByAuthor/(\w+)|', $path_info, $matched)) {  # /manga/findByAuthor/oda,miyazaki
                 send_json_response(
