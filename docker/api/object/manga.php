@@ -39,7 +39,7 @@
                 send_json_response(
                     findMangaByAuthors(explode(",", $matched[1]))
                 );
-            } elseif (preg_match('|/manga/findByAuthor$|', $path_info, $matched)) {  # /manga/findByAuthor?author=oda,miyazaki
+            } elseif (preg_match('|/manga/findByAuthor|', $path_info, $matched)) {  # /manga/findByAuthor?author=oda,miyazaki
                 send_json_response(
                     findMangaByAuthors(explode(",", $_GET["author"]))
                 );
@@ -92,8 +92,18 @@
         ];
     }
 
-    function findMangaByAuthors($authors) {
-        return mockMangaList();  # TODO
+    function findMangaByAuthors($authors)
+    {
+        $query = "SELECT * FROM manga m INNER JOIN `write` w ON m.id = w.idmanga INNER JOIN author a ON a.id = w.idauthor ";
+        if ($authors != "") {
+            $query .= " WHERE a.first_name or a.last_name LIKE :authors";
+        }
+        $response = array();
+        $stmt = EDatabase::prepare($query);
+        $stmt->execute(array(':authors' => $authors[0]));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     }
 
     function send_json_response($struct) {
