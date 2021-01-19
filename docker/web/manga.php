@@ -30,3 +30,11 @@ error_reporting(E_ALL);
             </ul>
         </div>  
     </div>
+  </div><?php
+?>
+<div class="grille">
+  <h1 class="">Voici où se trouvera le tableau de manga</h1>
+
+
+
+</div>
