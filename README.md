@@ -9,11 +9,11 @@ Pour commencer, il vous faudra les logiciels suivant :
 - docker-compose
 - curl (Pour les tests)
 
-Puis, il vous faudra cloner le projet sur votre machine : git clone git@github.com:nicolasreymond/kata-manga.git
+Puis, il vous faudra cloner le projet sur votre machine : `git clone git@github.com:nicolasreymond/kata-manga.git`
 
 Ensuite naviguer dans le dossier contenant le fichier 'docker-compose.yml' : `cd kata-manga/docker`
 
-Et enfin lancer la commande : docker-compose up
+Et enfin lancer la commande : `docker-compose up`
 
 ## Application
 
