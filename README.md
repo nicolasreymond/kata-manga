@@ -4,10 +4,10 @@
 
 Pour commencer, il vous faudra les logiciels suivant :
 
-    - git
-    - docker
-    - docker-compose
-    - curl (Pour les tests)
+- git
+- docker
+- docker-compose
+- curl (Pour les tests)
 
 Puis, il vous faudra cloner le projet sur votre machine : git clone git@github.com:nicolasreymond/kata-manga.git
 
