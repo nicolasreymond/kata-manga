@@ -41,11 +41,11 @@
                 send_json_response(
                     findMangaByAuthors(explode(",", $matched[1]))
                 );
-            } elseif (preg_match('|/manga/findByAuthor|', $path_info, $matched)) {  # /manga/findByAuthor?author=oda,miyazaki
+            } elseif (preg_match('|/manga/findByAuthor|', $path_info, $matched)) {  # /manga/findByAuthor?author=oda
                 send_json_response(
-                    findMangaByAuthors(explode(",", $_GET["author"]))
+                    findMangaByAuthors($_GET["author"])
                 );
-            } elseif (preg_match('|/manga/findByGenre|', $path_info, $matched)) {  # /manga/findByGenre?genre=oda,miyazaki
+            } elseif (preg_match('|/manga/findByGenre|', $path_info, $matched)) {  # /manga/findByGenre?genre=action
                 send_json_response(
                     findMangaByGenre(explode(",", $_GET["genre"]))
                 );
@@ -114,7 +114,7 @@
     {
         $query = "SELECT * FROM manga m INNER JOIN `write` w ON m.id = w.idmanga INNER JOIN author a ON a.id = w.idauthor ";
         if ($authors != "") {
-            $query .= " WHERE a.first_name or a.last_name LIKE :authors";
+            $query .= " WHERE a.first_name or a.last_name LIKE ':authors'";
         }
         $response = array();
         $stmt = EDatabase::prepare($query);
