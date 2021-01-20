@@ -6,7 +6,7 @@ function getManga($id = 0)
         //http://api.icndb.com/jokes/random
       
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://localhost:80/api/object/api.php/manga/" . $id);
+        curl_setopt($ch, CURLOPT_URL, "http://localhost/api/object/manga.php/manga/" . $id);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPGET, 1);
       
@@ -23,7 +23,7 @@ function getManga($id = 0)
     } else {
         $ids = array();
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://localhost:80/api/object/api.php/manga");
+        curl_setopt($ch, CURLOPT_URL, "http://localhost/api/object/manga.php/manga");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPGET, 1);
       
@@ -34,7 +34,7 @@ function getManga($id = 0)
         }
         
         $MangaObj = json_decode($MangaJSON, true);
-        // var_dump($MangaObj);
+        
         foreach ($MangaObj as $manga) {
             $ids[] = $manga['id'];
         }
@@ -82,7 +82,7 @@ function make_table()
     <table>
     <thead>
             <tr>
-                <th>id</th>
+                <th>ranks</th>
                 <th>title</th>
                 <th>status</th>
                 <th>start_date</th>
@@ -97,7 +97,7 @@ function make_table()
       $manga = getManga($id)
       ?>
       <tr>
-          <td><?= $manga['id'] ?></td>
+          <td><?= $manga['rank'] ?></td>
           <td><?= $manga['title'] ?></td>
           <td><?= $manga['status'] ?></td>
           <td><?= $manga['start_date'] ?></td>
