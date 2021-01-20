@@ -5,7 +5,7 @@ services:
     ports:
       - 1337:80
     volumes: 
-      - "./api:/var/www/html/api"
+      - "./:/var/www/html"
   db:
     image: mariadb
     environment:
@@ -15,13 +15,7 @@ services:
       - ./initSQL:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
-  web:
-      build: ./api
-      ports:
-        - 1338:80
-      volumes: 
-        - "./web:/var/www/html/"
   adminer:
     image: adminer
     ports:
-      - 8888:8080
+      - 8889:8080
