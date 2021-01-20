@@ -5,7 +5,7 @@
 
     function getMangas()
     {
-        $query = "SELECT * FROM manga LIMIT 50";
+        $query = "SELECT * FROM manga order by rank";
         $response = array();
         $stmt = EDatabase::prepare($query);
         $stmt->execute();
