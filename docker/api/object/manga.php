@@ -10,7 +10,6 @@
         $stmt = EDatabase::prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-      
     }
     
     function getMangaInfo($id=0)
@@ -25,6 +24,7 @@
         $stmt = EDatabase::prepare($query);
         $stmt->execute(array(':id' => $id));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      
         return $result;
     }
 
@@ -49,12 +49,15 @@
                 send_json_response(
                     findMangaByGenre(explode(",", $_GET["genre"]))
                 );
+            } elseif (preg_match('|/manga/findGenre/(\d+)|', $path_info, $matched)) {  # /manga/findGenre/7
+                send_json_response(
+                    getGenreByID($matched[1])
+                );
+            } else {
+                send_json_response(
+                    getMangas()
+                );
             }
-            // } else {
-            //     send_json_response(
-            //         getMangas()
-            //     );
-            // }
             break;
 
         case 'POST':
@@ -95,6 +98,16 @@
             $manga1,
             $manga2
         ];
+    }
+
+    function getGenreByID($id)
+    {
+        $query = "SELECT g.name as genre_name From manga m INNER JOIN `classify` c ON m.id = c.idmanga INNER JOIN genre g ON g.id = c.idgenre WHERE m.id = :id";
+        $response = array();
+        $stmt = EDatabase::prepare($query);
+        $stmt->execute(array(':id' => $id));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     function findMangaByAuthors($authors)
