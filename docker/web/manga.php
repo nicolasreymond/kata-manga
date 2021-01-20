@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require("api_function.php");
+ 
+
 
 ?>
 
@@ -61,7 +61,7 @@ li a:hover {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="manga.php">Manga</a></li>
-                <li><a href="API">API</a></li>
+                <li><a href="http://localhost:1337/swagger-ui/dist/index.html">API</a></li>
             </ul>
         </div>  
     </div>
