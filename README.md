@@ -17,8 +17,12 @@ Et enfin lancer la commande : `docker-compose up`
 
 ## Application
 
-Aller sur `http://locahost:1338` and enjoy!
+Aller sur `http://locahost:1337/web` and enjoy!
 
+
+## API
+
+Pour voir les données de l'API, aller sur `http://locahost:1337/api/object/manga`.
 
 ## Swagger
 
