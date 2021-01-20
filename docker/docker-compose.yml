@@ -10,13 +10,18 @@ services:
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: Super
-      MYSQL_DATABASE: kata-api
+      MYSQL_DATABASE: KataManga
     volumes:
-      - ./initSQL:/docker-entrypoint-initdb.d
+      - ../initSQL:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
-
+  web:
+      build: ./api
+      ports:
+        - 1338:80
+      volumes: 
+        - "./web:/var/www/html/"
   adminer:
     image: adminer
     ports:
-      - 8888:8080
+      - 8889:8080
