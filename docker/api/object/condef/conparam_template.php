@@ -6,9 +6,9 @@
 /*
  * @brief Connection constants
  */
-define('EDB_DBTYPE', "XXX");
-define('EDB_DBNAME', "XXX");
-define('EDB_HOST',   "XXX");
-define('EDB_PORT',   "XXX");
-define('EDB_USER',   "XXX");
-define('EDB_PASS',   "XXX");
+define('EDB_DBTYPE', "XXX");  // mysql
+define('EDB_DBNAME', "XXX");  // KataManga
+define('EDB_HOST',   "XXX");  // db
+define('EDB_PORT',   "XXX");  // 3306
+define('EDB_USER',   "XXX");  // root
+define('EDB_PASS',   "XXX");  // Super
