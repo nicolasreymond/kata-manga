@@ -13,6 +13,8 @@ Puis, il vous faudra cloner le projet sur votre machine : `git clone git@github.
 
 Ensuite naviguer dans le dossier contenant le fichier 'docker-compose.yml' : `cd kata-manga/docker`
 
+Ensuite, renommez le fichié `conparam_template.php` en `conparam.php` et y mettre vos infos concernant votre base de données.
+
 Et enfin lancer la commande : `docker-compose up`
 
 ## Application
